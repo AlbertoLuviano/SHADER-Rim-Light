@@ -1,0 +1,393 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://Sprites/SpaceMarine/Idle04.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/SpaceMarine/Idle01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/SpaceMarine/Idle03.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/SpaceMarine/Idle02.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/SpaceMarine/Run08.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/SpaceMarine/Run10.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/SpaceMarine/Run09.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/SpaceMarine/Run01.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/SpaceMarine/Run02.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/SpaceMarine/Run06.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/SpaceMarine/Run03.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/SpaceMarine/Run05.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/SpaceMarine/Run07.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/SpaceMarine/Run04.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/SpaceMarine/Attack01.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/SpaceMarine/Attack02.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/SpaceMarine/SpaceMarineShield.tres" type="Material" id=17]
+[ext_resource path="res://Sprites/SpaceMarine/Jump02.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/SpaceMarine/Jump03.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/SpaceMarine/Box01.fbx" type="PackedScene" id=20]
+[ext_resource path="res://Sprites/SpaceMarine/background.png" type="Texture" id=21]
+[ext_resource path="res://Scripts/SpaceMarineMove.gd" type="Script" id=22]
+[ext_resource path="res://Sprites/SpaceMarine/Box02.fbx" type="PackedScene" id=23]
+[ext_resource path="res://Sprites/SpaceMarine/Box03.fbx" type="PackedScene" id=24]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.398894
+height = 0.637982
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Run",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 8.0
+} ]
+
+[sub_resource type="SphereMesh" id=3]
+radius = 1.25
+height = 2.5
+radial_segments = 24
+rings = 12
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 15, 1, 15 )
+
+[sub_resource type="PlaneMesh" id=5]
+size = Vector2( 30, 30 )
+subdivide_width = 20
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 21 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 15, 0.1, 15 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 1.5, 2, 2.5 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 3.5, 1, 1 )
+
+[sub_resource type="BoxShape" id=10]
+
+[node name="World" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shield" type="Button" parent="UI"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 124.0
+margin_bottom = 44.0
+rect_scale = Vector2( 2, 2 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Force Field"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="D-Trigger" type="Button" parent="UI"]
+margin_left = 24.0
+margin_top = 80.0
+margin_right = 124.0
+margin_bottom = 100.0
+rect_scale = Vector2( 2, 2 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "D-Trigger"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Label" parent="UI"]
+margin_left = 784.0
+margin_top = 376.0
+margin_right = 886.0
+margin_bottom = 475.0
+rect_scale = Vector2( 2, 2 )
+text = "Move - Arrows
+Attack - Z
+Jump - Spacebar
+
+Shield - C
+D Trigger - X"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -244.0
+margin_top = 16.0
+margin_right = -138.0
+margin_bottom = 64.0
+rect_scale = Vector2( 2, 2 )
+text = "Pixelart 
+\"Sideview Sci-Fi\"
+by ansimuz"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI"]
+
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16 )
+cull_mask = 1
+projection = 1
+current = true
+fov = 50.0
+size = 6.0
+target = NodePath("../CameraPoint")
+speed = 5.0
+enabled = true
+
+[node name="CameraPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16 )
+
+[node name="SpaceMarineKB" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+script = ExtResource( 22 )
+gravity = -0.612
+jumpForce = 18.0
+xVelocity = 5.0
+
+[node name="Shape" type="CollisionShape" parent="SpaceMarineKB"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprites" type="AnimatedSprite3D" parent="SpaceMarineKB"]
+cast_shadow = 0
+pixel_size = 0.04
+billboard = 2
+double_sided = false
+alpha_cut = 1
+frames = SubResource( 2 )
+animation = "Idle"
+frame = 2
+
+[node name="ForceShield" type="MeshInstance" parent="SpaceMarineKB"]
+mesh = SubResource( 3 )
+material/0 = ExtResource( 17 )
+
+[node name="doJump" type="Timer" parent="SpaceMarineKB"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Blocks" type="Spatial" parent="."]
+
+[node name="Bounds" type="Spatial" parent="Blocks"]
+
+[node name="Floor" type="StaticBody" parent="Blocks/Bounds"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/Bounds/Floor"]
+shape = SubResource( 4 )
+
+[node name="Floor" type="MeshInstance" parent="Blocks/Bounds/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Wall01" type="StaticBody" parent="Blocks/Bounds"]
+transform = Transform( 2.65431e-14, -1.62921e-07, -1, -1, -1.62921e-07, 0, -1.62921e-07, 1, -1.62921e-07, 0, 0, -15 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/Bounds/Wall01"]
+shape = SubResource( 7 )
+
+[node name="Floor" type="MeshInstance" parent="Blocks/Bounds/Wall01"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27374e-13, 0.1, -2.27374e-13 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Wall02" type="StaticBody" parent="Blocks/Bounds"]
+transform = Transform( 2.65431e-14, -1.62921e-07, 1, -1, -1.62921e-07, 0, 1.62921e-07, -1, -1.62921e-07, 0, 0, 15 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/Bounds/Wall02"]
+shape = SubResource( 7 )
+
+[node name="Floor" type="MeshInstance" parent="Blocks/Bounds/Wall02"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27374e-13, 0.1, 2.27374e-13 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Wall03" type="StaticBody" parent="Blocks/Bounds"]
+transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -15, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/Bounds/Wall03"]
+shape = SubResource( 7 )
+
+[node name="Floor" type="MeshInstance" parent="Blocks/Bounds/Wall03"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Wall04" type="StaticBody" parent="Blocks/Bounds"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 15, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/Bounds/Wall04"]
+shape = SubResource( 7 )
+
+[node name="Floor" type="MeshInstance" parent="Blocks/Bounds/Wall04"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="BoxModel01" type="Spatial" parent="Blocks"]
+
+[node name="Box01" parent="Blocks/BoxModel01" instance=ExtResource( 20 )]
+transform = Transform( -8.74228e-09, 6.55671e-08, -1.5, 0.2, -6.55671e-08, -6.55671e-08, -8.74228e-09, -1.5, -6.55671e-08, -2, 0.297188, 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Blocks/BoxModel01/Box01"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel01/Box01/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5 )
+shape = SubResource( 8 )
+
+[node name="Box02" parent="Blocks/BoxModel01" instance=ExtResource( 20 )]
+transform = Transform( -2.5, 0, -3.01992e-07, 0, 2, 0, 3.77489e-07, 0, -2, 12, -0.702812, -13 )
+
+[node name="StaticBody" type="StaticBody" parent="Blocks/BoxModel01/Box02"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel01/Box02/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5 )
+shape = SubResource( 8 )
+
+[node name="Box03" parent="Blocks/BoxModel01" instance=ExtResource( 20 )]
+transform = Transform( 2, 0, 3.57628e-07, 0, 1.5, 0, -4.76837e-07, 0, 1.5, -12, -0.702812, -9 )
+
+[node name="StaticBody" type="StaticBody" parent="Blocks/BoxModel01/Box03"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel01/Box03/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5 )
+shape = SubResource( 8 )
+
+[node name="BoxModel02" type="Spatial" parent="Blocks"]
+
+[node name="Box02" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 15, 0, -4 )
+
+[node name="StaticBody" type="StaticBody" parent="Blocks/BoxModel02/Box02"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box02/StaticBody"]
+shape = SubResource( 9 )
+
+[node name="Box03" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 11, -1, 2 )
+
+[node name="StaticBody2" type="StaticBody" parent="Blocks/BoxModel02/Box03"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box03/StaticBody2"]
+shape = SubResource( 9 )
+
+[node name="Box04" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13, -3, 8 )
+
+[node name="StaticBody3" type="StaticBody" parent="Blocks/BoxModel02/Box04"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box04/StaticBody3"]
+shape = SubResource( 9 )
+
+[node name="Box05" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, 0, -1, -0.59214, 0.805835, 2.58833e-08, 0.805835, 0.59214, -3.52242e-08, -14.0227, 1.76106, -4.38791 )
+
+[node name="StaticBody3" type="StaticBody" parent="Blocks/BoxModel02/Box05"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box05/StaticBody3"]
+shape = SubResource( 9 )
+
+[node name="Box06" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -13 )
+
+[node name="StaticBody4" type="StaticBody" parent="Blocks/BoxModel02/Box06"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box06/StaticBody4"]
+shape = SubResource( 9 )
+
+[node name="Box07" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, -13 )
+
+[node name="StaticBody5" type="StaticBody" parent="Blocks/BoxModel02/Box07"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box07/StaticBody5"]
+shape = SubResource( 9 )
+
+[node name="Box08" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 3, -15 )
+
+[node name="StaticBody6" type="StaticBody" parent="Blocks/BoxModel02/Box08"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box08/StaticBody6"]
+shape = SubResource( 9 )
+
+[node name="Box09" parent="Blocks/BoxModel02" instance=ExtResource( 23 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 4, -13 )
+
+[node name="StaticBody7" type="StaticBody" parent="Blocks/BoxModel02/Box09"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel02/Box09/StaticBody7"]
+shape = SubResource( 9 )
+
+[node name="BoxModel03" type="Spatial" parent="Blocks"]
+
+[node name="Box03" parent="Blocks/BoxModel03" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3532, 0, -6.80491 )
+
+[node name="StaticBody" type="StaticBody" parent="Blocks/BoxModel03/Box03"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel03/Box03/StaticBody"]
+shape = SubResource( 10 )
+
+[node name="Box04" parent="Blocks/BoxModel03" instance=ExtResource( 24 )]
+transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -13, 0, -6 )
+
+[node name="StaticBody2" type="StaticBody" parent="Blocks/BoxModel03/Box04"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel03/Box04/StaticBody2"]
+shape = SubResource( 10 )
+
+[node name="Box05" parent="Blocks/BoxModel03" instance=ExtResource( 24 )]
+transform = Transform( -8.74228e-08, 0, -1.5, 0, 1.5, 0, 2, 0, -6.55671e-08, -13, 0, 12.9951 )
+
+[node name="StaticBody3" type="StaticBody" parent="Blocks/BoxModel03/Box05"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blocks/BoxModel03/Box05/StaticBody3"]
+shape = SubResource( 10 )
+[connection signal="pressed" from="UI/Shield" to="SpaceMarineKB" method="_toogleShield"]
+[connection signal="pressed" from="UI/D-Trigger" to="SpaceMarineKB" method="_toogleD"]

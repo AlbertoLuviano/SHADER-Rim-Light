@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/SpaceMarine/SpaceMarineShield.shader" type="Shader" id=1]
+[ext_resource path="res://Sprites/SpaceMarine/HoneyNormal.jpg" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/rimWidth = 3.0
+shader_param/rimColor = Color( 1, 0.0235294, 0, 1 )
+shader_param/outerRimColor = Color( 1, 0.494118, 0, 1 )
+shader_param/normalStrength = 0.1
+shader_param/normalTiling = Vector2( 2, 1 )
+shader_param/normalOffset = Vector2( -0.1, 0.1 )
+shader_param/normalMap = ExtResource( 2 )
