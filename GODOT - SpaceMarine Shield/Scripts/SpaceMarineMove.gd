@@ -3,6 +3,7 @@ extends KinematicBody
 onready var doJumpTimer = $doJump
 onready var animSprites = $Sprites
 onready var forceShieldNode = $ForceShield
+onready var forceShieldV2Node = $RimV2
 onready var cameraPointNode = get_node("/root/World/CameraPoint")
 onready var realCameraNode = get_node("/root/World/InterpolatedCamera")
 
@@ -75,7 +76,14 @@ func _process(_delta):
 				cameraPointNode.translation.z)
 
 func _toogleShield():
-	forceShieldNode.visible = !forceShieldNode.visible
+	if !forceShieldNode.visible and !forceShieldV2Node.visible:
+		forceShieldNode.visible = true
+	elif forceShieldNode.visible and !forceShieldV2Node.visible:
+		forceShieldNode.visible = false
+		forceShieldV2Node.visible = true
+	elif !forceShieldNode.visible and forceShieldV2Node.visible:
+		forceShieldNode.visible = false
+		forceShieldV2Node.visible = false
 
 func _toogleD():
 	realCameraNode.projection = 1 if realCameraNode.projection == 0 else 0
